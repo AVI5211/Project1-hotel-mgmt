@@ -31,8 +31,9 @@ if [ ! -f .env ]; then
     echo "📝 Creating .env file from .env.example..."
     cp .env.example .env
     echo ""
-    echo "⚠️  IMPORTANT: Please edit .env and add your Cloudinary credentials!"
-    echo "   Get free credentials at: https://cloudinary.com"
+    echo "⚠️  IMPORTANT: Please edit .env and set your JWT_SECRET!"
+    echo "   Cloudinary is OPTIONAL - you can leave it empty for local dev."
+    echo "   Images will be stored locally in backend/src/uploads/"
     echo ""
     read -p "Press Enter after you've configured .env (or press Ctrl+C to exit)..."
 fi

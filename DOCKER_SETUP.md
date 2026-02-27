@@ -38,19 +38,27 @@ cp .env.example .env
 Edit `.env` with your configuration:
 
 ```env
-# JWT Secret (Change this!)
+# JWT Secret (Required - Change this!)
 JWT_SECRET=your-super-secret-jwt-key-change-in-production
 
-# Cloudinary Configuration (Required)
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+# Cloudinary Configuration (OPTIONAL for local dev)
+# Leave empty to use local storage in ./backend/src/uploads
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
 
 # API URL for Frontend
 VITE_API_URL=http://localhost:5000/api
 ```
 
-**Note:** You need to create a free Cloudinary account at https://cloudinary.com to get your credentials for image uploads.
+**For Local Development:**
+- You can leave Cloudinary settings **empty**
+- Images will be stored locally in `backend/src/uploads/`
+- No external service needed!
+
+**For Production:**
+- Configure Cloudinary for cloud storage
+- Get free credentials at https://cloudinary.com
 
 ### 3. Start All Services
 

@@ -1,5 +1,7 @@
 # Hotel Management System
 
+> **🚀 Want to get started quickly?** See [QUICKSTART.md](QUICKSTART.md) - Only 3 steps, no cloud setup needed!
+
 ## Overview
 
 This Hotel Management System is a full-stack application designed to provide users with a seamless experience for searching and booking hotels in various locations. Key features include:
@@ -33,7 +35,8 @@ This Hotel Management System is a full-stack application designed to provide use
 - **Backend**:
   - Express (for server-side logic)
   - Multer (for file uploads)
-  - Cloudinary (for storing hotel images)
+  - **Local file storage** (for development)
+  - Cloudinary (optional - for production cloud storage)
   - Docker (for containerization)
 
 ## Setup Guide
@@ -55,7 +58,8 @@ cd hotel-management-system
 
 # 2. Copy and configure environment variables
 cp .env.example .env
-# Edit .env with your Cloudinary credentials
+# Edit .env - only JWT_SECRET is required for local dev
+# Cloudinary settings can be left empty (uses local storage)
 
 # 3. Start everything with one command
 docker-compose up

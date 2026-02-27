@@ -24,8 +24,9 @@ if not exist .env (
     echo 📝 Creating .env file from .env.example...
     copy .env.example .env
     echo.
-    echo ⚠️  IMPORTANT: Please edit .env and add your Cloudinary credentials!
-    echo    Get free credentials at: https://cloudinary.com
+    echo ⚠️  IMPORTANT: Please edit .env and set your JWT_SECRET!
+    echo    Cloudinary is OPTIONAL - you can leave it empty for local dev.
+    echo    Images will be stored locally in backend/src/uploads/
     echo.
     pause
 )
