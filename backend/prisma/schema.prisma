@@ -1,0 +1,115 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Guest {
+  id            Int            @id @default(autoincrement())
+  name          String
+  email         String         @unique
+  password      String
+  dateOfBirth   DateTime
+  phoneNumber   String
+  language      String
+  work          String
+  address       String
+  guestPassport GuestPassport?
+  bookings      Booking[]
+  hotelsVisited GuestHotel[]
+  Deal          NewDeal?       @relation(fields: [newDealId], references: [id])
+  newDealId     Int?
+}
+
+model Hotel {
+  id             Int          @id @default(autoincrement())
+  name           String
+  location       Locations
+  incomingGuests GuestHotel[]
+  hotelImage     String
+
+  NewDeal  NewDeal[]
+  Booking  Booking[]
+  features String[]
+  ratings  Int       @default(4)
+}
+
+model GuestHotel {
+  id      Int   @default(autoincrement())
+  guest   Guest @relation(fields: [guestId], references: [id])
+  guestId Int
+  hotel   Hotel @relation(fields: [hotelId], references: [id])
+  hotelId Int
+
+  @@unique([guestId, hotelId])
+}
+
+model NewDeal {
+  id             Int       @id @default(autoincrement())
+  validTill      DateTime
+  location       Locations
+  hotel          Hotel     @relation(fields: [hotelId], references: [id])
+  hotelId        Int
+  packageCost    Int
+  guestsEnrolled Guest[]
+}
+
+model GuestPassport {
+  id                 Int      @id @default(autoincrement())
+  passportNumber     String
+  passportIssueDate  DateTime
+  passportExpiryDate DateTime
+  dateOfBirth        DateTime
+  placeOfBirth       String
+  passportCountry    String
+  holder             Guest    @relation(fields: [passportHolderId], references: [id])
+  passportHolderId   Int      @unique
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+}
+
+model Booking {
+  id           Int       @id @default(autoincrement())
+  date         DateTime
+  checkoutDate DateTime
+  status       Status?   @default(notVerified)
+  location     Locations
+  bookedBy     Guest     @relation(fields: [guestId], references: [id])
+  guestId      Int
+  hotel        Hotel?    @relation(fields: [hotelId], references: [id])
+  hotelId      Int?
+  cost         Int?
+}
+
+enum GuestType {
+  Individual
+  Platinum
+  LongTerm
+  Vacation
+}
+
+enum Status {
+  confirmed
+  notVerified
+}
+
+enum Locations {
+  Kathmandu
+  UnitedKingdom
+  Melbourne
+  Paris
+  Kolkata
+  Islamabad
+  Moscow
+  Bengaluru
+  Sydney
+  Delhi
+}

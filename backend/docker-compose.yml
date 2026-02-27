@@ -1,0 +1,23 @@
+# NOTE: This file is DEPRECATED!
+# Please use the docker-compose.yml in the root directory instead.
+# The root docker-compose.yml runs both frontend and backend together.
+#
+# To run the full application:
+#   cd .. (to project root)
+#   docker-compose up
+
+# version: '3.7'
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres_db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: hotel_db
+      POSTGRES_USER: hotel_user
+      POSTGRES_PASSWORD: hotel_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:

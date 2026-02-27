@@ -1,0 +1,5 @@
+# Uploads Directory
+
+This folder stores hotel images for local development.
+
+In production, you should configure Cloudinary for cloud storage.
